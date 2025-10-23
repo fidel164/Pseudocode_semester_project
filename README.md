@@ -11,4 +11,5 @@ By implementing the data flow, I aim to establish a structured and repeatable fr
 ensuring that every dataset passes through a standardized process (calibration, validation, and feature extraction) to guarantee consistency and reproducibility.
 
 Files that this repository contains: 
-1. DFD_Semester_project: Is a data-flow diagram to work with drone imagery and develop correlation plots as outputs. 
+1. DFD_Semester_project: Is a data-flow diagram to work with drone imagery and develop correlation plots as outputs.
+2. A branch called Pseudocode_feedback, where the Pseudocode for the Data flow diagram can be found. 
