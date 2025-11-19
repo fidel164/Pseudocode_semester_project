@@ -1,5 +1,5 @@
 # ---- Pseudocode in python: using drone multispectral imagery to correlate plant diseases with vegetation indices ----
-# The drone data comes from external database from collaborators in charge of fly the drones. 
+# The drone data comes from external database from collaborators in charge of fly the drones.
 
 # STEP 1: Load drone imagery
 def load_drone_data(source_path):
@@ -15,41 +15,40 @@ def load_drone_data(source_path):
     # Return the loaded image data
     return image
 
-# STEP 2: Filter raw data for RGB and multispectral images
+
+# ---- STEP 2: Filter raw data for RGB and multispectral images ----
 def filter_rgb_and_multispectral(rawdata_list):
     """Filter and clean raw drone data for analysis."""
-    filtered = []
-    for each item in rawdata_list:
-    sensor_type = get sensor type from item (default to "multispectral")
-    bands = get band list from item
+    filtered_data = []
 
-    # RGB images have 3 bands (R, G, B)
-    # Multispectral images have more than 3 bands
-    if sensor_type contains "rgb" OR number of bands == 3:
-        add item to filtered_data
-    else if sensor_type contains "multispectral" OR number of bands > 3:
-        add item to filtered_data
-    end if
-    end for
+    for item in rawdata_list:
+        category = classify_single_image(item)  # reuse logic
+        filtered_data.append(item)
 
     return filtered_data
 
+
 # ---- STEP 3: Classify RGB and multispectral images ----
+def classify_single_image(item):
+    """Return 'rgb' or 'multispectral' based on sensor type or number of bands."""
+    sensor_type = item.get("sensor_type", "").lower()
+    bands = item.get("bands", [])
+
+    if "rgb" in sensor_type or len(bands) == 3:
+        return "rgb"
+    else:
+        return "multispectral"
+
+
 def classify_images(input_files):
     """Classify input drone images into RGB and multispectral categories."""
 
-    #classification categories
-    classified = {
-        "rgb": [],
-        "multispectral": []
-    }
-        # Classify based on sensor type or number of bands
-        if "rgb" in sensor_type OR length(bands) == 3:
-            add item to classified["rgb"]
-        else if "multispectral" in sensor_type OR length(bands) > 3:
-            add item to classified["multispectral"]
+    classified = {"rgb": [], "multispectral": []}
 
-    # Return the categorized images
+    for item in input_files:
+        category = classify_single_image(item)  # reuse logic
+        classified[category].append(item)
+
     return classified
 
 
@@ -57,41 +56,58 @@ def classify_images(input_files):
 def create_orthomosaics(classified_images):
     """Generate and calibrate orthomosaics using Pix4D."""
 
-#PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,
-#to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer 
-# but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use.
+    # PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,
+    # to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer
+    # but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use.
 
     orthomosaics = pix4d_create_orthomosaic(classified_images)
-    calibrated = pix4d_calibrate(orthomosaics)
+    calibrated_orthomosaics = pix4d_calibrate(orthomosaics)
     return calibrated_orthomosaics
 
 
-# ---- STEP 5: Calculate Vegetation Indices (QGIS) ----
-def calculate_VI(calibrated_orthomosaics):
-    """Compute vegetation indices using QGIS tools."""
-# ---- STEP 5: Calculate Vegetation Indices (QGIS) ----
-#----QGIS is a open source free software used for in different research fields. 
+from osgeo import gdal
+import numpy as np
+# ---- STEP 5: Calculate Vegetation Indices (QGIS / GDAL) ----
+# ----QGIS is a open source free software used for in different research fields.
 # In agriculture is used for crop monitoring and remote sensing----
 
-# Open the red band raster image
-    with open_raster(red_band) as red_source:
-        red_band_data = read_band_data(red_source)
+
+def calculate_VI(calibrated_orthomosaics):
+    """Compute vegetation indices using GIS-compatible GDAL tools."""
+
+    red_band = calibrated_orthomosaics["red"]
+    nir_band = calibrated_orthomosaics["nir"]
+
+    # Open the red band raster image
+    red_ds = gdal.Open(red_band)
+    red_band_data = red_ds.GetRasterBand(1).ReadAsArray().astype(float)
 
     # Open the near-infrared (NIR) band raster image
-    with open_raster(nir_band) as nir_source:
-        nir_band_data = read_band_data(nir_source)
-
-    # Convert band data to float type for accurate calculations
-    red_band_data_float = convert_to_float(red_band_data)
-    nir_band_data_float = convert_to_float(nir_band_data)
+    nir_ds = gdal.Open(nir_band)
+    nir_band_data = nir_ds.GetRasterBand(1).ReadAsArray().astype(float)
 
     # Calculate NDVI using the formula: (NIR - Red) / (NIR + Red)
-    ndvi = (nir_band_data_float - red_band_data_float) / (nir_band_data_float + red_band_data_float)
+    ndvi = (nir_band_data - red_band_data) / (nir_band_data + red_band_data)
 
-    # Return the calculated NDVI array
-    RETURN ndvi
+    return ndvi
+
 
 # ---- STEP 6: Background Removal and Plot Creation ----
+def remove_background(VI_data):
+    """Remove background pixels from a vegetation index raster.
+    Example approach: - Mask out pixels with NDVI < 0"""
+
+    cleaned = VI_data.copy()
+    cleaned[cleaned < 0] = 0
+    return cleaned
+
+
+def create_plot_boundaries(cleaned_data):
+    """Generate plot boundaries from cleaned vegetation index data.
+    function: - Thresholding, morphological operations, or polygon extraction"""
+    return {"plot_1": cleaned_data}
+
+
 def create_experimental_plots(VI_data):
     """Remove background noise and define experimental plots."""
     cleaned_data = remove_background(VI_data)
@@ -100,6 +116,22 @@ def create_experimental_plots(VI_data):
 
 
 # ---- STEP 7: Feature Extraction ----
+def calculate_area(plot):
+    """Placeholder: compute area of a plot."""
+    # Example: return plot area in square meters
+    return plot.get("area", 0)
+
+
+def get_altitude(plot):
+    """Placeholder: get average altitude of a plot."""
+    return plot.get("altitude", 0)
+
+
+def compute_statistics(plot):
+    """Placeholder: compute statistical values (mean, std) of vegetation index in a plot."""
+    return {"mean": np.mean(plot.get("VI", [])), "std": np.std(plot.get("VI", []))}
+
+
 def extract_features(plots):
     """Extract area, altitude, and statistical values per plot."""
     features = []
@@ -107,7 +139,14 @@ def extract_features(plots):
         area = calculate_area(plot)
         altitude = get_altitude(plot)
         stats = compute_statistics(plot)
-        features.append({"plot_id": plot.id, "area": area, "altitude": altitude, "stats": stats})
+
+        # Use a plot identifier, either from 'id' or generate one
+        plot_id = plot.get("id", f"plot_{len(features) + 1}")
+
+        features.append(
+            {"plot_id": plot_id, "area": area, "altitude": altitude, "stats": stats}
+        )
+
     return features
 
 
@@ -129,9 +168,5 @@ def generate_output_graphs(correlations):
 # ---- STEP 10: Select Best Correlations ----
 def select_best_correlations(correlations):
     """Identify strongest correlations over time."""
-    best = [c for c in correlations if c["r_value"] > 0.7]  
+    best = [c for c in correlations if c["r_value"] > 0.7]
     return best
-
-
-
-    
