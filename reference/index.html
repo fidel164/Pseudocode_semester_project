@@ -578,6 +578,9 @@
     <div class="doc doc-contents ">
 
         <p>Generate and calibrate orthomosaics using Pix4D.</p>
+<p>PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,
+to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer
+but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use.</p>
 
 
             <details class="quote">
@@ -592,11 +595,11 @@
 <span class="normal">126</span>
 <span class="normal">127</span>
 <span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_orthomosaics</span><span class="p">(</span><span class="n">classified_images</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate and calibrate orthomosaics using Pix4D.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate and calibrate orthomosaics using Pix4D.</span>
 
-    <span class="c1"># PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,</span>
-    <span class="c1"># to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer</span>
-    <span class="c1"># but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use.</span>
+<span class="sd">    PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,</span>
+<span class="sd">    to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer</span>
+<span class="sd">    but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use.&quot;&quot;&quot;</span>
 
     <span class="n">orthomosaics</span> <span class="o">=</span> <span class="n">pix4d_create_orthomosaic</span><span class="p">(</span><span class="n">classified_images</span><span class="p">)</span>
     <span class="n">calibrated_orthomosaics</span> <span class="o">=</span> <span class="n">pix4d_calibrate</span><span class="p">(</span><span class="n">orthomosaics</span><span class="p">)</span>
