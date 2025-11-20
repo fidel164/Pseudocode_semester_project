@@ -117,11 +117,11 @@ def classify_images(input_files):
 
 # ---- STEP 4: Create Orthomosaics and Calibrate (Pix4D) ----
 def create_orthomosaics(classified_images):
-    """Generate and calibrate orthomosaics using Pix4D."""
+    """Generate and calibrate orthomosaics using Pix4D.
 
-    # PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,
-    # to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer
-    # but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use.
+    PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,
+    to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer
+    but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use."""
 
     orthomosaics = pix4d_create_orthomosaic(classified_images)
     calibrated_orthomosaics = pix4d_calibrate(orthomosaics)
