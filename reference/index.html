@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Reference - Drone Data Workflow Documentation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Drone Data Workflow Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../tutorials/" class="nav-link">Tutorials</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../how-to-guide/" class="nav-link">How-To Guides</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../explanation/" class="nav-link">Explanations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Reference</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Workflow Steps</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../steps/1_load_drone_data/" class="dropdown-item">Step 1 — Load Drone Data</a>
+</li>
+                                    
+<li>
+    <a href="../steps/2_filter_rgb/" class="dropdown-item">Step 2 — Filter RGB & Multispectral</a>
+</li>
+                                    
+<li>
+    <a href="../steps/3_classify_images/" class="dropdown-item">Step 3 — Classify Images</a>
+</li>
+                                    
+<li>
+    <a href="../steps/4_orthomosaics/" class="dropdown-item">Step 4 — Orthomosaics (Pix4D)</a>
+</li>
+                                    
+<li>
+    <a href="../steps/5_calculate_VI.md" class="dropdown-item">Step 5 — Vegetation Indices (VI)</a>
+</li>
+                                    
+<li>
+    <a href="../steps/6_background_plots/" class="dropdown-item">Step 6 — Background Removal & Plots</a>
+</li>
+                                    
+<li>
+    <a href="../steps/7_feature_extraction/" class="dropdown-item">Step 7 — Feature Extraction</a>
+</li>
+                                    
+<li>
+    <a href="../steps/8_correlation/" class="dropdown-item">Step 8 — Correlation with Disease Data</a>
+</li>
+                                    
+<li>
+    <a href="../steps/9_generate_graphs/" class="dropdown-item">Step 9 — Output Graphs</a>
+</li>
+                                    
+<li>
+    <a href="../steps/10_best_correlations/" class="dropdown-item">Step 10 — Best Correlations</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../explanation/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../steps/1_load_drone_data/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#api-reference" class="nav-link">API Reference</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#function-reference" class="nav-link">Function Reference</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD" class="nav-link">Pseudocode_on_DFD</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.calculate_VI" class="nav-link">calculate_VI</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.calculate_area" class="nav-link">calculate_area</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.classify_images" class="nav-link">classify_images</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.classify_single_image" class="nav-link">classify_single_image</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.compute_statistics" class="nav-link">compute_statistics</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.correlate_with_disease_data" class="nav-link">correlate_with_disease_data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.create_correlation_plots_R" class="nav-link">create_correlation_plots_R</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.create_experimental_plots" class="nav-link">create_experimental_plots</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.create_orthomosaics" class="nav-link">create_orthomosaics</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.create_plot_boundaries" class="nav-link">create_plot_boundaries</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.extract_features" class="nav-link">extract_features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.filter_rgb_and_multispectral" class="nav-link">filter_rgb_and_multispectral</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.generate_output_graphs" class="nav-link">generate_output_graphs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.get_altitude" class="nav-link">get_altitude</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.load_drone_data" class="nav-link">load_drone_data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.pix4d_calibrate" class="nav-link">pix4d_calibrate</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.pix4d_create_orthomosaic" class="nav-link">pix4d_create_orthomosaic</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.read_drone_image" class="nav-link">read_drone_image</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.remove_background" class="nav-link">remove_background</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.run_R_correlation_analysis" class="nav-link">run_R_correlation_analysis</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.select_best_correlations" class="nav-link">select_best_correlations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.store_data" class="nav-link">store_data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="api-reference">API Reference</h1>
+<p>This page contains the technical documentation of the drone-based plant disease workflow.</p>
+<p>It includes every function defined in <code>Pseudocode_on_DFD.py</code>, with details about:</p>
+<ul>
+<li>What the function does  </li>
+<li>Its inputs  </li>
+<li>Its outputs  </li>
+<li>Any notes or required tools  </li>
+</ul>
+<p>The content below is automatically generated using <strong>mkdocstrings</strong>.</p>
+<hr />
+<h2 id="function-reference">Function Reference</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="Pseudocode_on_DFD"></a>
+    <div class="doc doc-contents first">
+
+        <p>Pseudocode pipeline for processing drone multispectral imagery to correlate plant diseases with vegetation indices</p>
+<p>Observation: In this pipeline external software are needed to follow the DFD.</p>
+<p>Therefore, many functions in this file are pseudocode placeholders for the external software:
+-Pix4D photogrammetry tools
+-QGIS / GDAL tools
+-R statistical scripts
+-Drone image reading functions</p>
+<p>In this sense, the pseudocode allow mkdocstring to import and document the code</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.calculate_VI" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">calculate_VI</span><span class="p">(</span><span class="n">calibrated_orthomosaics</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compute vegetation indices using GIS-compatible GDAL tools.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_VI</span><span class="p">(</span><span class="n">calibrated_orthomosaics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute vegetation indices using GIS-compatible GDAL tools.&quot;&quot;&quot;</span>
+
+    <span class="n">red_band</span> <span class="o">=</span> <span class="n">calibrated_orthomosaics</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">]</span>
+    <span class="n">nir_band</span> <span class="o">=</span> <span class="n">calibrated_orthomosaics</span><span class="p">[</span><span class="s2">&quot;nir&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Open the red band raster image</span>
+    <span class="n">red_ds</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">red_band</span><span class="p">)</span>
+    <span class="n">red_band_data</span> <span class="o">=</span> <span class="n">red_ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="c1"># Open the near-infrared (NIR) band raster image</span>
+    <span class="n">nir_ds</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">nir_band</span><span class="p">)</span>
+    <span class="n">nir_band_data</span> <span class="o">=</span> <span class="n">nir_ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="c1"># Calculate NDVI using the formula: (NIR - Red) / (NIR + Red)</span>
+    <span class="n">ndvi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir_band_data</span> <span class="o">-</span> <span class="n">red_band_data</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">nir_band_data</span> <span class="o">+</span> <span class="n">red_band_data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ndvi</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.calculate_area" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">calculate_area</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder: compute area of a plot.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_area</span><span class="p">(</span><span class="n">plot</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder: compute area of a plot.&quot;&quot;&quot;</span>
+    <span class="c1"># Example: return plot area in square meters</span>
+    <span class="k">return</span> <span class="n">plot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;area&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.classify_images" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">classify_images</span><span class="p">(</span><span class="n">input_files</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Classify input drone images into RGB and multispectral categories.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">classify_images</span><span class="p">(</span><span class="n">input_files</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Classify input drone images into RGB and multispectral categories.&quot;&quot;&quot;</span>
+
+    <span class="n">classified</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;rgb&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;multispectral&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">:</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="n">classify_single_image</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>  <span class="c1"># reuse logic</span>
+        <span class="n">classified</span><span class="p">[</span><span class="n">category</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">classified</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.classify_single_image" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">classify_single_image</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return 'rgb' or 'multispectral' based on sensor type or number of bands.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">classify_single_image</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return &#39;rgb&#39; or &#39;multispectral&#39; based on sensor type or number of bands.&quot;&quot;&quot;</span>
+    <span class="n">sensor_type</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sensor_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">bands</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="k">if</span> <span class="s2">&quot;rgb&quot;</span> <span class="ow">in</span> <span class="n">sensor_type</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;rgb&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;multispectral&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.compute_statistics" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compute_statistics</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder: compute statistical values (mean, std) of vegetation index in a plot.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compute_statistics</span><span class="p">(</span><span class="n">plot</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder: compute statistical values (mean, std) of vegetation index in a plot.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;VI&quot;</span><span class="p">,</span> <span class="p">[])),</span> <span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;VI&quot;</span><span class="p">,</span> <span class="p">[]))}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.correlate_with_disease_data" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">correlate_with_disease_data</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">disease_data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Perform correlation analysis using R.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">correlate_with_disease_data</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">disease_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform correlation analysis using R.&quot;&quot;&quot;</span>
+    <span class="n">correlations</span> <span class="o">=</span> <span class="n">run_R_correlation_analysis</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">disease_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">correlations</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.create_correlation_plots_R" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_correlation_plots_R</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder for R-based correlation plotting.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_correlation_plots_R</span><span class="p">(</span><span class="n">correlations</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder for R-based correlation plotting.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;graph1.png&quot;</span><span class="p">,</span> <span class="s2">&quot;graph2.png&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.create_experimental_plots" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_experimental_plots</span><span class="p">(</span><span class="n">VI_data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Remove background noise and define experimental plots.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_experimental_plots</span><span class="p">(</span><span class="n">VI_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove background noise and define experimental plots.&quot;&quot;&quot;</span>
+    <span class="n">cleaned_data</span> <span class="o">=</span> <span class="n">remove_background</span><span class="p">(</span><span class="n">VI_data</span><span class="p">)</span>
+    <span class="n">plot_boundaries</span> <span class="o">=</span> <span class="n">create_plot_boundaries</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plot_boundaries</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.create_orthomosaics" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_orthomosaics</span><span class="p">(</span><span class="n">classified_images</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate and calibrate orthomosaics using Pix4D.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_orthomosaics</span><span class="p">(</span><span class="n">classified_images</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate and calibrate orthomosaics using Pix4D.&quot;&quot;&quot;</span>
+
+    <span class="c1"># PIX4Dmapper is a professional photogrammetry software that processes images, typically from drones,</span>
+    <span class="c1"># to create high-accuracy 2D maps and 3D models. The software can be run on a desktop computer</span>
+    <span class="c1"># but can be used in conjunction with Pix4Dcloud for online processing. Is a professional-grade photogrammetry software that requires a license to use.</span>
+
+    <span class="n">orthomosaics</span> <span class="o">=</span> <span class="n">pix4d_create_orthomosaic</span><span class="p">(</span><span class="n">classified_images</span><span class="p">)</span>
+    <span class="n">calibrated_orthomosaics</span> <span class="o">=</span> <span class="n">pix4d_calibrate</span><span class="p">(</span><span class="n">orthomosaics</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">calibrated_orthomosaics</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.create_plot_boundaries" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_plot_boundaries</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate plot boundaries from cleaned vegetation index data.
+function: - Thresholding, morphological operations, or polygon extraction</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_plot_boundaries</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate plot boundaries from cleaned vegetation index data.</span>
+<span class="sd">    function: - Thresholding, morphological operations, or polygon extraction&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;plot_1&quot;</span><span class="p">:</span> <span class="n">cleaned_data</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.extract_features" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">extract_features</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Extract area, altitude, and statistical values per plot.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">extract_features</span><span class="p">(</span><span class="n">plots</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract area, altitude, and statistical values per plot.&quot;&quot;&quot;</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="n">calculate_area</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+        <span class="n">altitude</span> <span class="o">=</span> <span class="n">get_altitude</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">compute_statistics</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+
+        <span class="c1"># Use a plot identifier, either from &#39;id&#39; or generate one</span>
+        <span class="n">plot_id</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;plot_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;plot_id&quot;</span><span class="p">:</span> <span class="n">plot_id</span><span class="p">,</span> <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="n">area</span><span class="p">,</span> <span class="s2">&quot;altitude&quot;</span><span class="p">:</span> <span class="n">altitude</span><span class="p">,</span> <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="n">stats</span><span class="p">}</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">features</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.filter_rgb_and_multispectral" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">filter_rgb_and_multispectral</span><span class="p">(</span><span class="n">rawdata_list</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Filter and clean raw drone data for analysis.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">filter_rgb_and_multispectral</span><span class="p">(</span><span class="n">rawdata_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter and clean raw drone data for analysis.&quot;&quot;&quot;</span>
+    <span class="n">filtered_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">rawdata_list</span><span class="p">:</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="n">classify_single_image</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>  <span class="c1"># reuse logic</span>
+        <span class="n">filtered_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filtered_data</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.generate_output_graphs" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_output_graphs</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate and store correlation plots.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate_output_graphs</span><span class="p">(</span><span class="n">correlations</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate and store correlation plots.&quot;&quot;&quot;</span>
+    <span class="n">graphs</span> <span class="o">=</span> <span class="n">create_correlation_plots_R</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span>
+    <span class="n">store_data</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="s2">&quot;DataStore/graphs&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">graphs</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.get_altitude" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_altitude</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder: get average altitude of a plot.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_altitude</span><span class="p">(</span><span class="n">plot</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder: get average altitude of a plot.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">plot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;altitude&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.load_drone_data" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">load_drone_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Load raw drone imagery from an external database or file path.</p>
+<p>Args:
+    source_path (str): File path or URL pointing to the drone image.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>ndarray or object: Loaded drone image data.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="FileNotFoundError">FileNotFoundError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If no image is found at the provided path.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="notes" open>
+  <summary>Notes</summary>
+  <ul>
+<li>This function uses <code>read_drone_image()</code>, which must be available</li>
+<li>The function does <em>not</em> perform any processing; it only loads data.</li>
+</ul>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">load_drone_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load raw drone imagery from an external database or file path.</span>
+
+<span class="sd">     Args:</span>
+<span class="sd">        source_path (str): File path or URL pointing to the drone image.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray or object: Loaded drone image data.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: If no image is found at the provided path.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - This function uses `read_drone_image()`, which must be available</span>
+<span class="sd">        - The function does *not* perform any processing; it only loads data.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Read the drone image (placeholder for actual read function)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">read_drone_image</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;UNCHANGED&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if image was loaded successfully</span>
+    <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Could not load image from &quot;</span> <span class="o">+</span> <span class="n">source_path</span><span class="p">)</span>
+
+    <span class="c1"># Return the loaded image data</span>
+    <span class="k">return</span> <span class="n">image</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.pix4d_calibrate" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">pix4d_calibrate</span><span class="p">(</span><span class="n">orthomosaic</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder for Pix4D calibration.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pix4d_calibrate</span><span class="p">(</span><span class="n">orthomosaic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder for Pix4D calibration.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;red&quot;</span><span class="p">:</span> <span class="s2">&quot;red_band.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;nir&quot;</span><span class="p">:</span> <span class="s2">&quot;nir_band.tif&quot;</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.pix4d_create_orthomosaic" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">pix4d_create_orthomosaic</span><span class="p">(</span><span class="n">classified_images</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder for Pix4D orthomosaic processing.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pix4d_create_orthomosaic</span><span class="p">(</span><span class="n">classified_images</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder for Pix4D orthomosaic processing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;orthomosaic&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.read_drone_image" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">read_drone_image</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;UNCHANGED&#39;</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder for drone-reading function (external tool required).</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">read_drone_image</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;UNCHANGED&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder for drone-reading function (external tool required).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;fake_image_data&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.remove_background" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">remove_background</span><span class="p">(</span><span class="n">VI_data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Remove background pixels from a vegetation index raster.
+Example approach: - Mask out pixels with NDVI &lt; 0</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_background</span><span class="p">(</span><span class="n">VI_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove background pixels from a vegetation index raster.</span>
+<span class="sd">    Example approach: - Mask out pixels with NDVI &lt; 0&quot;&quot;&quot;</span>
+
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">VI_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">cleaned</span><span class="p">[</span><span class="n">cleaned</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">cleaned</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.run_R_correlation_analysis" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">run_R_correlation_analysis</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">disease_data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder for R-based statistical correlation.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">run_R_correlation_analysis</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">disease_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder for R-based statistical correlation.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;r_value&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s2">&quot;plot&quot;</span><span class="p">:</span> <span class="s2">&quot;plot_1&quot;</span><span class="p">}]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.select_best_correlations" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">select_best_correlations</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Identify strongest correlations over time.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">select_best_correlations</span><span class="p">(</span><span class="n">correlations</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify strongest correlations over time.&quot;&quot;&quot;</span>
+    <span class="n">best</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">correlations</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;r_value&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">best</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="Pseudocode_on_DFD.store_data" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">store_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">out_folder</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder for saving graphs or outputs.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>Pseudocode_on_DFD.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">store_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">out_folder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder for saving graphs or outputs.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
