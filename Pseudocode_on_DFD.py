@@ -3,7 +3,20 @@
 
 # STEP 1: Load drone imagery
 def load_drone_data(source_path):
-    """Load raw drone imagery from an external database or file path."""
+    """Load raw drone imagery from an external database or file path.
+
+     Args:
+        source_path (str): File path or URL pointing to the drone image.
+
+    Returns:
+        ndarray or object: Loaded drone image data.
+
+    Raises:
+        FileNotFoundError: If no image is found at the provided path.
+
+    Notes:
+        - This function uses `read_drone_image()`, which must be available
+        - The function does *not* perform any processing; it only loads data."""
 
     # Read the drone image (placeholder for actual read function)
     image = read_drone_image(source_path, mode="UNCHANGED")

@@ -1,0 +1,28 @@
+site_name: Drone Data Workflow Documentation
+
+nav:
+  - Home: index.md
+  - Tutorials: tutorials.md
+  - How-To Guides: how-to-guide.md
+  - Explanations: explanation.md
+  - Reference: reference.md
+
+
+  - Workflow Steps:
+      - Step 1 — Load Drone Data: steps/1_load_drone_data.md
+      - Step 2 — Filter RGB & Multispectral: steps/2_filter_rgb.md
+      - Step 3 — Classify Images: steps/3_classify_images.md
+      - Step 4 — Orthomosaics (Pix4D): steps/4_orthomosaics.md
+      - Step 5 — Vegetation Indices (VI): steps/5_calculate_VI.md
+      - Step 6 — Background Removal & Plots: steps/6_background_plots.md
+      - Step 7 — Feature Extraction: steps/7_feature_extraction.md
+      - Step 8 — Correlation with Disease Data: steps/8_correlation.md
+      - Step 9 — Output Graphs: steps/9_generate_graphs.md
+      - Step 10 — Best Correlations: steps/10_best_correlations.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["."]
