@@ -1,7 +1,57 @@
-# ---- Pseudocode in python: using drone multispectral imagery to correlate plant diseases with vegetation indices ----
-# The drone data comes from external database from collaborators in charge of fly the drones.
+"""Pseudocode pipeline for processing drone multispectral imagery to correlate plant diseases with vegetation indices
+
+Observation: In this pipeline external software are needed to follow the DFD.
+
+Therefore, many functions in this file are pseudocode placeholders for the external software:
+-Pix4D photogrammetry tools
+-QGIS / GDAL tools
+-R statistical scripts
+-Drone image reading functions
+
+In this sense, the pseudocode allow mkdocstring to import and document the code
+"""
+
+# ------------------------------------------------------------
+try:
+    from osgeo import gdal
+except ImportError:
+    gdal = None  # Placeholder so module loads
+
+import numpy as np
+
+
+def read_drone_image(path, mode="UNCHANGED"):
+    """Placeholder for drone-reading function (external tool required)."""
+    return {"fake_image_data": True}
+
+
+def pix4d_create_orthomosaic(classified_images):
+    """Placeholder for Pix4D orthomosaic processing."""
+    return {"orthomosaic": True}
+
+
+def pix4d_calibrate(orthomosaic):
+    """Placeholder for Pix4D calibration."""
+    return {"red": "red_band.tif", "nir": "nir_band.tif"}
+
+
+def run_R_correlation_analysis(features, disease_data):
+    """Placeholder for R-based statistical correlation."""
+    return [{"r_value": 0.8, "plot": "plot_1"}]
+
+
+def create_correlation_plots_R(correlations):
+    """Placeholder for R-based correlation plotting."""
+    return ["graph1.png", "graph2.png"]
+
+
+def store_data(data, out_folder):
+    """Placeholder for saving graphs or outputs."""
+    return True
+
 
 # STEP 1: Load drone imagery
+# The drone data comes from external database from collaborators in charge of fly the drones.
 def load_drone_data(source_path):
     """Load raw drone imagery from an external database or file path.
 
