@@ -1,1 +1,1 @@
-::: Pseudocode_on_DFD.calculate_VI
+::: Pseudocode_on_DFD.calculate_Vi

@@ -13,7 +13,7 @@ nav:
       - Step 2 — Filter RGB & Multispectral: steps/2_filter_rgb.md
       - Step 3 — Classify Images: steps/3_classify_images.md
       - Step 4 — Orthomosaics (Pix4D): steps/4_orthomosaics.md
-      - Step 5 — Vegetation Indices (VI): steps/5_calculate_VI.md
+      - Step 5 — Vegetation Indices (VI): steps/5_calculate_Vi.md
       - Step 6 — Background Removal & Plots: steps/6_background_plots.md
       - Step 7 — Feature Extraction: steps/7_feature_extraction.md
       - Step 8 — Correlation with Disease Data: steps/8_correlation.md

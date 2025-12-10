@@ -135,7 +135,7 @@ import numpy as np
 # In agriculture is used for crop monitoring and remote sensing----
 
 
-def calculate_VI(calibrated_orthomosaics):
+def calculate_Vi(calibrated_orthomosaics):
     """Compute vegetation indices using GIS-compatible GDAL tools."""
 
     red_band = calibrated_orthomosaics["red"]
