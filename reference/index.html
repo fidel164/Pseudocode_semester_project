@@ -71,7 +71,7 @@
 </li>
                                     
 <li>
-    <a href="../steps/5_calculate_VI/" class="dropdown-item">Step 5 — Vegetation Indices (VI)</a>
+    <a href="../steps/5_calculate_Vi/" class="dropdown-item">Step 5 — Vegetation Indices (VI)</a>
 </li>
                                     
 <li>
@@ -141,7 +141,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.calculate_VI" class="nav-link">calculate_VI</a>
+            <li class="nav-item" data-bs-level="2"><a href="#Pseudocode_on_DFD.calculate_Vi" class="nav-link">calculate_Vi</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -289,8 +289,8 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="Pseudocode_on_DFD.calculate_VI" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">calculate_VI</span><span class="p">(</span><span class="n">calibrated_orthomosaics</span><span class="p">)</span></code>
+<h2 id="Pseudocode_on_DFD.calculate_Vi" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">calculate_Vi</span><span class="p">(</span><span class="n">calibrated_orthomosaics</span><span class="p">)</span></code>
 
 </h2>
 
@@ -319,7 +319,7 @@
 <span class="normal">152</span>
 <span class="normal">153</span>
 <span class="normal">154</span>
-<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_VI</span><span class="p">(</span><span class="n">calibrated_orthomosaics</span><span class="p">):</span>
+<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_Vi</span><span class="p">(</span><span class="n">calibrated_orthomosaics</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute vegetation indices using GIS-compatible GDAL tools.&quot;&quot;&quot;</span>
 
     <span class="n">red_band</span> <span class="o">=</span> <span class="n">calibrated_orthomosaics</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">]</span>
