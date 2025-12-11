@@ -12,6 +12,7 @@ def load_drone_data(source: Union[str, Path, Iterable[Union[str, Path]]]) -> Lis
                 + list(source.glob("*.tiff"))
                 + list(source.glob("*.jpg"))
                 + list(source.glob("*.jpeg"))
+                + list(source.glob("*.PNG"))
             )
             if not files:
                 raise FileNotFoundError(f"No image files found in directory: {source}")

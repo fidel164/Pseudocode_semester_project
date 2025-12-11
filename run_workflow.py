@@ -1,6 +1,7 @@
 # run_workflow.py
 
 from workflow.step1_load import load_drone_data
+from workflow.step2_filter import filter_and_classify
 
 
 def main():
@@ -15,6 +16,15 @@ def main():
         print(" -", img["path"])
 
     print("Workflow Step 1 completed!")
+
+    print("=== STEP 2: Filtering & Classifying ===")
+    filtered = filter_and_classify(images)
+
+    print("Classification results:")
+    for img in filtered:
+        print(f"{img['path'].name}: {img['sensor_type']}")
+
+    print("Workflow Step 2 completed!")
 
 
 if __name__ == "__main__":
