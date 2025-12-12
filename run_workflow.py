@@ -4,6 +4,8 @@ from workflow.step1_load import load_drone_data
 from workflow.step2_filter import filter_and_classify
 from workflow.step3_pix4d import pix4d_checkpoint
 from workflow.step4_vi_qgis import qgis_vi_checkpoint
+from workflow.step5_background import step5_background_removal, write_singleband_geotiff
+from pathlib import Path
 
 
 def main():
@@ -40,6 +42,25 @@ def main():
     print("Workflow Step 4 completed. Detected vegetation indices:")
     for name, path in vi_files.items():
         print(f"  {name}: {path}")
+
+    print("=== STEP 5: Background removal (automated) ===")
+
+    # Get NDVI path from Step 4 outputs (adjust key if needed)
+    ndvi_candidates = [p for k, p in vi_files.items() if "ndvi" in k.lower()]
+    if not ndvi_candidates:
+        raise RuntimeError(
+            "No NDVI-like key found. Available keys: " + ", ".join(vi_files.keys())
+        )
+
+    ndvi_path = ndvi_candidates[0]  # choose the first NDVI file found
+
+    cleaned = step5_background_removal(ndvi_path, threshold=0.2)
+
+    out_path = Path("DataStore") / "ndvi_cleaned.tif"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    write_singleband_geotiff(out_path, cleaned, reference_path=ndvi_path)
+    print("Saved cleaned NDVI:", out_path)
 
 
 if __name__ == "__main__":
