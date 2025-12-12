@@ -23,7 +23,7 @@ def classify_image_by_filename(path: Path) -> str:
     ):
         return "multispectral"
 
-    return "unknown"
+    return "unknown/raw_data"
 
 
 def filter_and_classify(images: List[Dict]) -> List[Dict]:
