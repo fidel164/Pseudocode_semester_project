@@ -5,6 +5,8 @@ from workflow.step2_filter import filter_and_classify
 from workflow.step3_pix4d import pix4d_checkpoint
 from workflow.step4_vi_qgis import qgis_vi_checkpoint
 from workflow.step5_background import step5_background_removal, write_singleband_geotiff
+from workflow.step6_plots import step6_create_plots
+from workflow.step7_features import step7_extract_features
 from pathlib import Path
 
 
@@ -61,6 +63,43 @@ def main():
 
     write_singleband_geotiff(out_path, cleaned, reference_path=ndvi_path)
     print("Saved cleaned NDVI:", out_path)
+
+    print("=== STEP 6: Experimental plots creation (automated) ===")
+    plots = step6_create_plots(out_path, min_pixels=50, threshold=0.0)
+    print("Number of plots detected:", len(plots))
+    if plots:
+        print("Example plot:", plots[0])
+
+    print("=== STEP 7: Feature extraction (automated) ===")
+    features = step7_extract_features(out_path, plots, threshold=0.0)
+
+    print("=== DEBUG STEP 7 ===")
+    print("Features rows:", len(features))
+    print("First feature row:", features[0] if features else None)
+
+    # Save features to CSV
+    import csv
+
+    features_csv = Path("DataStore") / "features_step7.csv"
+    features_csv.parent.mkdir(parents=True, exist_ok=True)
+
+    with features_csv.open("w", newline="") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "plot_id",
+                "pixel_count",
+                "ndvi_mean",
+                "ndvi_std",
+                "ndvi_min",
+                "ndvi_max",
+            ],
+        )
+        writer.writeheader()
+        for row in features:
+            writer.writerow(row)
+
+    print("Saved Step 7 features:", features_csv.resolve())
 
 
 if __name__ == "__main__":
