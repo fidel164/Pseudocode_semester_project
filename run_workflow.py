@@ -2,6 +2,7 @@
 
 from workflow.step1_load import load_drone_data
 from workflow.step2_filter import filter_and_classify
+from workflow.step3_pix4d import pix4d_checkpoint
 
 
 def main():
@@ -25,6 +26,10 @@ def main():
         print(f"{img['path'].name}: {img['sensor_type']}")
 
     print("Workflow Step 2 completed!")
+
+    print("=== STEP 3: Pix4D checkpoint (manual step) ===")
+    pix4d_checkpoint(folder, project_note="My drone experiment")
+    print("Workflow Step 3 completed (returned from Pix4D checkpoint).")
 
 
 if __name__ == "__main__":
