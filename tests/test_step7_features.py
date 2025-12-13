@@ -13,7 +13,7 @@ def test_step7_extract_features_two_plots():
 
     plots = [
         {"plot_id": "plot_1", "pixel_count": 6, "bbox": (1, 2, 1, 3)},
-        {"plot_id": "plot_2", "pixel_count": 6, "bbox": (6, 5, 6, 8)},
+        {"plot_id": "plot_2", "pixel_count": 6, "bbox": (6, 6, 6, 8)},
     ]
 
     feats = extract_features(ndvi, plots, threshold=0.0)
