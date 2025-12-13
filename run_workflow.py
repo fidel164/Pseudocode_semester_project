@@ -7,6 +7,8 @@ from workflow.step4_vi_qgis import qgis_vi_checkpoint
 from workflow.step5_background import step5_background_removal, write_singleband_geotiff
 from workflow.step6_plots import step6_create_plots
 from workflow.step7_features import step7_extract_features
+from workflow.step8_correlation import step8_run
+from workflow.step9_plotting import step9_plot_ndvi_vs_disease
 from pathlib import Path
 
 
@@ -100,6 +102,41 @@ def main():
             writer.writerow(row)
 
     print("Saved Step 7 features:", features_csv.resolve())
+
+    # --- STEP 8: Correlation (automated) ---
+    print("=== STEP 8: Correlation (automated) ===")
+
+    disease_csv = Path("DataStore") / "disease_ratings.csv"
+    if not disease_csv.exists():
+        raise FileNotFoundError(
+            f"Disease file not found: {disease_csv.resolve()}\n"
+            "Create DataStore/disease_ratings.csv with columns: plot_id,disease_severity"
+        )
+
+    corr_df = step8_run(
+        features_csv=features_csv,
+        disease_csv=disease_csv,
+        disease_col="disease_severity",
+        x_cols=["ndvi_mean", "ndvi_std", "ndvi_min", "ndvi_max", "pixel_count"],
+    )
+
+    corr_out = Path("DataStore") / "correlations_step8.csv"
+    corr_df.to_csv(corr_out, index=False)
+    print("Saved Step 8 correlations:", corr_out.resolve())
+    print(corr_df.head())
+
+    # --- STEP 9: Plotting (automated) ---
+    print("=== STEP 9: NDVI vs Disease plot (automated) ===")
+
+    plot_out = Path("DataStore") / "ndvi_vs_disease.png"
+    step9_plot_ndvi_vs_disease(
+        features_csv=features_csv,
+        disease_csv=disease_csv,
+        out_png=plot_out,
+        x_col="ndvi_mean",
+        y_col="disease_severity",
+    )
+    print("Saved Step 9 plot:", plot_out.resolve())
 
 
 if __name__ == "__main__":
