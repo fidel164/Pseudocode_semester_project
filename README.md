@@ -33,9 +33,9 @@ Step 4 – QGIS
 These steps are paused in the workflow and resumed once outputs are ready.
 
 Automated Steps (Python) are unit tested using pytest.
-Step                                   Output
-Step 1	Load drone image paths	    -> metadata
-Step 2	Filter & classify imagery   -> RGB / multispectral
+Step                                  
+-Step 1:Load drone image paths-> metadata
+-Step 2:Filter & classify imagery-> RGB / multispectral
 Step 5	NDVI background removal	    -> ndvi_cleaned.tif
 Step 6	Experimental plot detection	-> Plot bounding boxes
 Step 7	Feature extraction	        -> features_step7.csv
@@ -43,33 +43,7 @@ Step 8	Correlation analysis	    -> correlations_step8.csv
 Step 9	Visualization	            -> ndvi_vs_disease.png
 
 
-
-Repository Structure
-Pseudocode_semester_project/
-├── workflow/
-│   ├── step1_load.py
-│   ├── step2_filter.py
-│   ├── step3_pix4d.py
-│   ├── step4_vi_qgis.py
-│   ├── step5_background.py
-│   ├── step6_plots.py
-│   ├── step7_features.py
-│   ├── step8_correlation.py
-│   └── step9_plotting.py
-├── tests/
-│   ├── test_step5_background.py
-│   ├── test_step6_plots.py
-│   ├── test_step7_features.py
-│   ├── test_step8_correlation.py
-│   └── test_step9_plotting.py
-├── DataStore/
-│   ├── ndvi_cleaned.tif
-│   ├── features_step7.csv
-│   ├── disease_ratings.csv
-│   ├── correlations_step8.csv
-│   └── ndvi_vs_disease.png
-├── run_workflow.py
-└── README.md
+<img width="506" height="1050" alt="image" src="https://github.com/user-attachments/assets/b1f6840f-bd50-4454-996c-c19f8c05d90a" />
 
 Requirements:
 -Python
