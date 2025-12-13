@@ -1,0 +1,6 @@
+x,y,r_pearson,n
+ndvi_min,disease_severity,0.06742617795747557,74
+ndvi_std,disease_severity,-0.6259877612458583,74
+pixel_count,disease_severity,-0.6980250499493202,74
+ndvi_max,disease_severity,-0.7194947080254781,74
+ndvi_mean,disease_severity,-0.8083923421669782,74
